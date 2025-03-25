@@ -1,20 +1,36 @@
-import { BodyBox } from './components/BodyBox'
-import { MinecraftModelCanvas } from './components/MinecraftModelCanvas';
+import { Canvas } from '@react-three/fiber';
+import { PerspectiveCamera, PresentationControls } from '@react-three/drei';
+import { BodyModel } from './components/BodyModel';
+import styles from "./App.module.css"
 
 function App() {
-  const skinUrl = "bear.png"
+  const skinUrl = "slim.png"
 
   return (
-    <MinecraftModelCanvas>
-      <group position={[0, 8, 0]}>
-        <BodyBox textureUrl={skinUrl} type='head' />
-        <BodyBox textureUrl={skinUrl} type='body' />
-        <BodyBox textureUrl={skinUrl} type='rightArm' />
-        <BodyBox textureUrl={skinUrl} type='leftArm' />
-        <BodyBox textureUrl={skinUrl} type='rightLeg' />
-        <BodyBox textureUrl={skinUrl} type='leftLeg' />
-      </group>
-    </MinecraftModelCanvas>
+    <Canvas
+      gl={{ pixelRatio: window.devicePixelRatio, antialias: true }}
+      dpr={[1, 2]}
+      className={styles.canvas}
+      style={{ inlineSize: "500px", blockSize: "600px", touchAction: "none" }}
+    >
+      <PerspectiveCamera
+        makeDefault
+        position={[0, 0, 50]}
+        fov={90}
+        zoom={2.5}
+      >
+        <ambientLight intensity={1.4} />
+        <directionalLight intensity={2.2} position={[10, 0, 10]} />
+      </PerspectiveCamera>
+
+      <PresentationControls
+        polar={[-Math.PI / 2, Math.PI / 2]}
+        damping={0.01}
+        speed={1.5}
+      >
+        <BodyModel skinUrl={skinUrl} />
+      </PresentationControls>
+    </Canvas>
   )
 }
 

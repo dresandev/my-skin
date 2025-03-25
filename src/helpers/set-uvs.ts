@@ -34,8 +34,14 @@ export const setUvs = (geometry: BoxGeometry, uvInfo: number[]) => {
       newUVData.push(uv.x, uv.y);
     }
   }
+
   uvAttr.set(new Float32Array(newUVData));
   uvAttr.needsUpdate = true;
-
-  return geometry;
 };
+
+const BODY_BOX_WIDTH = 64
+const BODY_BOX_HEIGHT = 64
+
+export const setBodyBoxUvs = (geometry: BoxGeometry, boxUvs: number[]) => {
+  setUvs(geometry, [...boxUvs, BODY_BOX_WIDTH, BODY_BOX_HEIGHT])
+}

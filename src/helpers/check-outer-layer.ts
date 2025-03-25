@@ -1,6 +1,6 @@
-import * as THREE from "three";
+import { Texture } from "three";
 
-export const checkOuterLayer = (texture: THREE.Texture): boolean => {
+export const checkOuterLayer = (texture: Texture): boolean => {
   const canvas = document.createElement("canvas");
   const ctx = canvas.getContext("2d");
   const img = texture.image;
