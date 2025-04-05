@@ -1,6 +1,0 @@
-.canvas {
-  border-radius: 4px;
-  border: 1px solid hsl(0 0% 100% / 0.15);
-  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABAAQMAAACQp+OdAAAABlBMVEUdICQhJSlncNu7AAAAF0lEQVQoU2NgAIL/QMAwysDKICQ/whkA8wL/Af1pVDkAAAAASUVORK5CYII=);
-  touch-action: none;
-}

@@ -1,26 +1,33 @@
-import { ModelType } from "../types"
-
-type GeometryData = [width: number, height: number, depth: number]
+import { Texture } from "three"
+import type { BoxData, ModelParts, ModelType, Position } from "@/types"
+import { outerLayerRegions } from "@/constants/outerlayer-regions"
+import { MODEL_POSITION, SLIM_MODEL_POSITION } from "@/constants/model-position"
+import { hasOuterLayerInRegion, Region } from "@/utils/has-outer-layer-in-region"
 
 export interface BodyPartData {
-  innerBoxData: {
-    geometry: GeometryData
-    uvs: number[]
-  },
-  outerBoxData: {
-    geometry: GeometryData
-    uvs: number[]
-  }
-  position: [x: number, y: number, z: number],
+  name: ModelParts
+  innerBoxData: BoxData
+  outerBoxData: BoxData
+  position: Position
+  polygonOffset?: boolean
+  depthWrite?: boolean
+  hasOuterLayer: boolean
 }
 
-export const getBodyPartsData = (modelType: ModelType): BodyPartData[] => {
+export const getBodyPartsData = (modelType: ModelType, texture: Texture): BodyPartData[] => {
   const isSlim = modelType === "slim"
+  const limbsWidth = isSlim ? 3 : 4
+  const limbsOuterBoxWidth = isSlim ? 3.5 : 4.5
+  const outerLayerRegion = isSlim ? outerLayerRegions.slim : outerLayerRegions.normal
+
+  const checkOuterLayer = (region: Region[]) => (
+    hasOuterLayerInRegion(texture, region)
+  )
 
   return (
     [
-      // Head
       {
+        name: "head",
         innerBoxData: {
           geometry: [8, 8, 8],
           uvs: [0, 0, 8, 8, 8],
@@ -29,10 +36,12 @@ export const getBodyPartsData = (modelType: ModelType): BodyPartData[] => {
           geometry: [9, 9, 9],
           uvs: [32, 0, 8, 8, 8],
         },
-        position: [0, 4, 0]
+        position: MODEL_POSITION.head,
+        polygonOffset: true,
+        hasOuterLayer: checkOuterLayer(outerLayerRegion.head)
       },
-      // Body
       {
+        name: "body",
         innerBoxData: {
           geometry: [8, 12, 4],
           uvs: [16, 16, 8, 12, 4],
@@ -41,34 +50,39 @@ export const getBodyPartsData = (modelType: ModelType): BodyPartData[] => {
           geometry: [8.5, 12.5, 4.5],
           uvs: [16, 32, 8, 12, 4],
         },
-        position: [0, -6, 0]
+        position: MODEL_POSITION.body,
+        hasOuterLayer: checkOuterLayer(outerLayerRegion.body)
       },
-      // Right Arm
       {
+        name: "rightArm",
         innerBoxData: {
-          geometry: [isSlim ? 3 : 4, 12, 4],
-          uvs: [40, 16, isSlim ? 3 : 4, 12, 4],
+          geometry: [limbsWidth, 12, 4],
+          uvs: [40, 16, limbsWidth, 12, 4],
         },
         outerBoxData: {
-          geometry: [isSlim ? 3.5 : 4.5, 12.5, 4.5],
-          uvs: [40, 32, isSlim ? 3 : 4, 12, 4],
+          geometry: [limbsOuterBoxWidth, 12.5, 4.5],
+          uvs: [40, 32, limbsWidth, 12, 4],
         },
-        position: [isSlim ? -5.5 : -6, -6, 0]
+        position: isSlim ? SLIM_MODEL_POSITION.rightArm : MODEL_POSITION.rightArm,
+        polygonOffset: true,
+        hasOuterLayer: checkOuterLayer(outerLayerRegion.rightArm)
       },
-      // Left Arm
       {
+        name: "leftArm",
         innerBoxData: {
-          geometry: [isSlim ? 3 : 4, 12, 4],
-          uvs: [32, 48, isSlim ? 3 : 4, 12, 4],
+          geometry: [limbsWidth, 12, 4],
+          uvs: [32, 48, limbsWidth, 12, 4],
         },
         outerBoxData: {
-          geometry: [isSlim ? 3.5 : 4.5, 12.5, 4.5],
-          uvs: [48, 48, isSlim ? 3 : 4, 12, 4],
+          geometry: [limbsOuterBoxWidth, 12.5, 4.5],
+          uvs: [48, 48, limbsWidth, 12, 4],
         },
-        position: [isSlim ? 5.5 : 6, -6, 0]
+        position: isSlim ? SLIM_MODEL_POSITION.leftArm : MODEL_POSITION.leftArm,
+        polygonOffset: true,
+        hasOuterLayer: checkOuterLayer(outerLayerRegion.leftArm)
       },
-      // Right Leg
       {
+        name: "rightLeg",
         innerBoxData: {
           geometry: [4, 12, 4],
           uvs: [0, 16, 4, 12, 4],
@@ -77,10 +91,13 @@ export const getBodyPartsData = (modelType: ModelType): BodyPartData[] => {
           geometry: [4.5, 12.5, 4.5],
           uvs: [0, 32, 4, 12, 4],
         },
-        position: [-2, -18, 0]
+        position: [-2, -18, 0],
+        polygonOffset: true,
+        depthWrite: false,
+        hasOuterLayer: checkOuterLayer(outerLayerRegion.rightLeg)
       },
-      // Left Leg
       {
+        name: "leftLeg",
         innerBoxData: {
           geometry: [4, 12, 4],
           uvs: [16, 48, 4, 12, 4],
@@ -89,7 +106,10 @@ export const getBodyPartsData = (modelType: ModelType): BodyPartData[] => {
           geometry: [4.5, 12.5, 4.5],
           uvs: [0, 48, 4, 12, 4],
         },
-        position: [2, -18, 0]
+        position: [2, -18, 0],
+        polygonOffset: true,
+        depthWrite: false,
+        hasOuterLayer: checkOuterLayer(outerLayerRegion.leftLeg)
       },
     ]
   )

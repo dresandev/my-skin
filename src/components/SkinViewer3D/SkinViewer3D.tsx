@@ -1,25 +1,31 @@
 import { Suspense } from "react"
 import { Canvas } from "@react-three/fiber"
-import { PerspectiveCamera, PresentationControls } from "@react-three/drei"
-import { BodyModel } from "../BodyModel"
-import styles from "./SkinViewer3D.module.css"
+import { Center, PerspectiveCamera, PresentationControls } from "@react-three/drei"
+import { EffectComposer, SMAA } from "@react-three/postprocessing"
+import { SMAAPreset } from "postprocessing"
+import { BodyModel } from "@/components/BodyModel"
+import { ArmorModel } from "@/components/ArmorModel"
 
 export const SkinViewer3D = () => {
   return (
     <Canvas
-      gl={{ pixelRatio: window.devicePixelRatio, antialias: true }}
-      dpr={[1, 2]}
-      style={{ inlineSize: 500, blockSize: 600 }}
-      className={styles.canvas}
+      gl={{ pixelRatio: window.devicePixelRatio }}
+      style={{
+        inlineSize: "max-content",
+        blockSize: 700,
+        touchAction: "none"
+      }}
     >
       <PerspectiveCamera
         makeDefault
-        position={[0, 0, 50]}
+        position={[0, 0, 45]}
         fov={90}
-        zoom={2.5}
+        zoom={2}
+        near={0.1}
+        far={100.0}
       >
-        <ambientLight intensity={1.4} />
-        <directionalLight intensity={2.2} position={[10, 0, 10]} />
+        <ambientLight intensity={1} />
+        <directionalLight intensity={2} position={[10, 0, 8]} />
       </PerspectiveCamera>
 
       <PresentationControls
@@ -28,9 +34,16 @@ export const SkinViewer3D = () => {
         speed={1.5}
       >
         <Suspense>
-          <BodyModel />
+          <Center>
+            <BodyModel />
+            {/* <ArmorModel /> */}
+          </Center>
         </Suspense>
       </PresentationControls>
+
+      <EffectComposer multisampling={0}>
+        <SMAA preset={SMAAPreset.ULTRA} />
+      </EffectComposer>
     </Canvas>
   )
 }

@@ -1,5 +1,5 @@
 import { toast } from "sonner"
-import { useModelStore } from "../../store/use-model-store"
+import { useModelStore } from "@/store/use-model-store"
 
 export const SkinInput = () => {
   const setSkin = useModelStore(state => state.setSkin)

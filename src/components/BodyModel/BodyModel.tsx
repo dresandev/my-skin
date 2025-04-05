@@ -1,24 +1,22 @@
-import { NearestFilter, SRGBColorSpace, TextureLoader } from "three"
+import { NearestFilter, TextureLoader } from "three"
 import { useLoader } from "@react-three/fiber"
-import { Center } from "@react-three/drei"
-import { inferModelType } from "../../helpers/infer-model-type"
-import { useModelStore } from "../../store/use-model-store"
-import { getBodyPartsData } from "../../data/body-parts-data"
-import { BodyPart } from "../BodyPart"
+import { inferModelType } from "@/utils/infer-model-type"
+import { getBodyPartsData } from "@/data/body-parts-data"
+import { useModelStore } from "@/store/use-model-store"
+import { BodyPart } from "@/components/BodyPart"
 
 export const BodyModel = () => {
   const skin = useModelStore(state => state.skin)
   const texture = useLoader(TextureLoader, skin)
   texture.magFilter = NearestFilter
   texture.minFilter = NearestFilter
-  texture.colorSpace = SRGBColorSpace
   texture.generateMipmaps = false
 
   const modelType = inferModelType(texture)
-  const bodyPartsData = getBodyPartsData(modelType)
+  const bodyPartsData = getBodyPartsData(modelType, texture)
 
   return (
-    <Center>
+    <>
       {bodyPartsData.map((data, index) => (
         <BodyPart
           key={index}
@@ -26,6 +24,6 @@ export const BodyModel = () => {
           data={data}
         />
       ))}
-    </Center>
+    </>
   )
 }

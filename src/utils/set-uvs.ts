@@ -1,15 +1,13 @@
 import { BoxGeometry, BufferAttribute, Vector2 } from "three"
 
-const UV_MARGIN = 0.15
-
 export const setUvs = (geometry: BoxGeometry, uvInfo: number[]) => {
   const [u, v, w, h, d, textureWidth, textureHeight] = uvInfo
 
   const toFaceVertices = (x1: number, y1: number, x2: number, y2: number) => [
-    new Vector2((x1 + UV_MARGIN) / textureWidth, 1.0 - (y2 - UV_MARGIN) / textureHeight),
-    new Vector2((x2 - UV_MARGIN) / textureWidth, 1.0 - (y2 - UV_MARGIN) / textureHeight),
-    new Vector2((x2 - UV_MARGIN) / textureWidth, 1.0 - (y1 + UV_MARGIN) / textureHeight),
-    new Vector2((x1 + UV_MARGIN) / textureWidth, 1.0 - (y1 + UV_MARGIN) / textureHeight),
+    new Vector2(x1 / textureWidth, 1.0 - y2 / textureHeight),
+    new Vector2(x2 / textureWidth, 1.0 - y2 / textureHeight),
+    new Vector2(x2 / textureWidth, 1.0 - y1 / textureHeight),
+    new Vector2(x1 / textureWidth, 1.0 - y1 / textureHeight),
   ]
 
   const top = toFaceVertices(u + d, v, u + w + d, v + d)
@@ -39,9 +37,6 @@ export const setUvs = (geometry: BoxGeometry, uvInfo: number[]) => {
   uvAttr.needsUpdate = true
 }
 
-const BODY_BOX_WIDTH = 64
-const BODY_BOX_HEIGHT = 64
-
 export const setBodyBoxUvs = (geometry: BoxGeometry, boxUvs: number[]) => {
-  setUvs(geometry, [...boxUvs, BODY_BOX_WIDTH, BODY_BOX_HEIGHT])
+  setUvs(geometry, [...boxUvs, 64, 64])
 }
