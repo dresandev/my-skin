@@ -1,5 +1,5 @@
 import type { BoxData, ModelParts, Position } from "@/types"
-import { MODEL_POSITION } from "@/constants/model-position"
+import { BODY_MODEL_POSITION } from "@/constants/body-model-position"
 
 export interface ArmorPartData {
   name: ModelParts
@@ -15,7 +15,7 @@ export const ARMOR_PARTS_DATA: ArmorPartData[] = [
       geometry: [9.5, 9.5, 9.5],
       uvs: [0, 0, 8, 8, 8],
     },
-    position: MODEL_POSITION.head,
+    position: BODY_MODEL_POSITION.head,
   },
   {
     name: "body",
@@ -23,7 +23,7 @@ export const ARMOR_PARTS_DATA: ArmorPartData[] = [
       geometry: [9, 13, 5],
       uvs: [16, 16, 8, 12, 4],
     },
-    position: MODEL_POSITION.body,
+    position: BODY_MODEL_POSITION.body,
   },
   {
     name: "rightArm",
@@ -31,7 +31,7 @@ export const ARMOR_PARTS_DATA: ArmorPartData[] = [
       geometry: [5.5, 13.5, 5.5],
       uvs: [40, 16, 4, 12, 4],
     },
-    position: MODEL_POSITION.rightArm,
+    position: BODY_MODEL_POSITION.rightArm,
     polygonOffset: true,
   },
   {
@@ -40,7 +40,7 @@ export const ARMOR_PARTS_DATA: ArmorPartData[] = [
       geometry: [5.5, 13.5, 5.5],
       uvs: [32, 48, 4, 12, 4],
     },
-    position: MODEL_POSITION.leftArm,
+    position: BODY_MODEL_POSITION.leftArm,
     polygonOffset: true,
   },
   {
@@ -49,7 +49,7 @@ export const ARMOR_PARTS_DATA: ArmorPartData[] = [
       geometry: [5, 13, 5],
       uvs: [0, 16, 4, 12, 4],
     },
-    position: MODEL_POSITION.rightLeg,
+    position: BODY_MODEL_POSITION.rightLeg,
     polygonOffset: true,
   },
   {
@@ -58,7 +58,7 @@ export const ARMOR_PARTS_DATA: ArmorPartData[] = [
       geometry: [5, 13, 5],
       uvs: [16, 48, 4, 12, 4],
     },
-    position: MODEL_POSITION.leftLeg,
+    position: BODY_MODEL_POSITION.leftLeg,
     polygonOffset: true,
   },
 ]

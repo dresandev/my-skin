@@ -1,3 +1,4 @@
+import { GodRays } from "@/components/GodRays"
 import { Toaster } from "sonner"
 
 interface Props {
@@ -7,6 +8,7 @@ interface Props {
 export const Layout: React.FC<Props> = ({ children }) => {
   return (
     <>
+      <GodRays />
       {children}
       <Toaster
         position="top-center"

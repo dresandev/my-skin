@@ -4,7 +4,7 @@ import {
   DoubleSide,
   Texture
 } from "three"
-import { setBodyBoxUvs } from "@/utils/set-uvs"
+import { setBodyBoxUVs } from "@/utils/set-uvs"
 import { BodyPartData } from "@/data/body-parts-data"
 
 interface Props {
@@ -24,14 +24,14 @@ export function BodyPart({ texture, data }: Props) {
 
   const innerBoxGeometry = useMemo(() => {
     const box = new BoxGeometry(...innerBoxData.geometry)
-    setBodyBoxUvs(box, innerBoxData.uvs)
+    setBodyBoxUVs(box, innerBoxData.uvs)
     box.computeVertexNormals()
     return box
   }, [innerBoxData.geometry, innerBoxData.uvs])
 
   const outerBoxGeometry = useMemo(() => {
     const box = new BoxGeometry(...outerBoxData.geometry)
-    setBodyBoxUvs(box, outerBoxData.uvs)
+    setBodyBoxUVs(box, outerBoxData.uvs)
     box.computeVertexNormals()
     return box
   }, [outerBoxData.geometry, outerBoxData.uvs])

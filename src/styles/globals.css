@@ -1,0 +1,24 @@
+@font-face {
+	font-family: "Noto Sans";
+	src: url("/fonts/NotoSans-VF.woff2") format("woff2");
+	font-weight: 100 900;
+	font-style: normal;
+}
+
+:root {
+	--primary-font: "Noto Sans", sans-serif;
+	--background-color: hsl(240 5% 7%);
+	--text-color: hsl(0 0% 93%);
+}
+
+body {
+	background-color: var(--background-color);
+	color: var(--text-color);
+	font-family: var(--primary-font);
+}
+
+#root {
+	display: grid;
+	place-items: center;
+	min-block-size: 100dvh;
+}

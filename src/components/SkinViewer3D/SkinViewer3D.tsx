@@ -5,6 +5,7 @@ import { EffectComposer, SMAA } from "@react-three/postprocessing"
 import { SMAAPreset } from "postprocessing"
 import { BodyModel } from "@/components/BodyModel"
 import { ArmorModel } from "@/components/ArmorModel"
+import { CapeModel } from "@/components/CapeModel"
 
 export const SkinViewer3D = () => {
   return (
@@ -37,6 +38,7 @@ export const SkinViewer3D = () => {
           <Center>
             <BodyModel />
             {/* <ArmorModel /> */}
+            <CapeModel />
           </Center>
         </Suspense>
       </PresentationControls>

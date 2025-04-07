@@ -5,7 +5,7 @@ interface ModelState {
   setSkin: (skin: string) => void
 }
 
-const DEFAULT_SKIN = "/skins/default.png"
+const DEFAULT_SKIN = "images/skins/default.png"
 
 export const useModelStore = create<ModelState>()(set => ({
   skin: DEFAULT_SKIN,

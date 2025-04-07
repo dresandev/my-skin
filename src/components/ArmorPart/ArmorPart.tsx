@@ -4,7 +4,7 @@ import {
   DoubleSide,
   Texture
 } from "three"
-import { setBodyBoxUvs } from "@/utils/set-uvs"
+import { setBodyBoxUVs } from "@/utils/set-uvs"
 import { ArmorPartData } from "@/constants/armor-model-data"
 
 interface Props {
@@ -13,13 +13,13 @@ interface Props {
 }
 
 export function ArmorPart({ texture, data }: Props) {
-  const { box, position, polygonOffset, } = data
+  const { box: { geometry, uvs }, position, polygonOffset, } = data
 
   const boxGeometry = useMemo(() => {
-    const newBox = new BoxGeometry(...box.geometry)
-    setBodyBoxUvs(newBox, box.uvs)
-    return newBox
-  }, [box.geometry, box.uvs])
+    const box = new BoxGeometry(...geometry)
+    setBodyBoxUVs(box, uvs)
+    return box
+  }, [geometry, uvs])
 
   return (
     <mesh geometry={boxGeometry} position={position}>

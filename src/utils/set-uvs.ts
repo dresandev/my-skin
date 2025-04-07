@@ -1,6 +1,6 @@
 import { BoxGeometry, BufferAttribute, Vector2 } from "three"
 
-export const setUvs = (geometry: BoxGeometry, uvInfo: number[]) => {
+export const setUVs = (geometry: BoxGeometry, uvInfo: number[]) => {
   const [u, v, w, h, d, textureWidth, textureHeight] = uvInfo
 
   const toFaceVertices = (x1: number, y1: number, x2: number, y2: number) => [
@@ -37,6 +37,11 @@ export const setUvs = (geometry: BoxGeometry, uvInfo: number[]) => {
   uvAttr.needsUpdate = true
 }
 
-export const setBodyBoxUvs = (geometry: BoxGeometry, boxUvs: number[]) => {
-  setUvs(geometry, [...boxUvs, 64, 64])
+export const setBodyBoxUVs = (geometry: BoxGeometry, boxUvs: number[]) => {
+  setUVs(geometry, [...boxUvs, 64, 64])
+}
+
+
+export const setCapeUVs = (geometry: BoxGeometry, boxUvs: number[]) => {
+  setUVs(geometry, [...boxUvs, 64, 32])
 }

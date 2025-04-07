@@ -1,7 +1,7 @@
 import { Texture } from "three"
 import type { BoxData, ModelParts, ModelType, Position } from "@/types"
 import { outerLayerRegions } from "@/constants/outerlayer-regions"
-import { MODEL_POSITION, SLIM_MODEL_POSITION } from "@/constants/model-position"
+import { BODY_MODEL_POSITION, BODY_SLIM_MODEL_POSITION } from "@/constants/body-model-position"
 import { hasOuterLayerInRegion, Region } from "@/utils/has-outer-layer-in-region"
 
 export interface BodyPartData {
@@ -36,7 +36,7 @@ export const getBodyPartsData = (modelType: ModelType, texture: Texture): BodyPa
           geometry: [9, 9, 9],
           uvs: [32, 0, 8, 8, 8],
         },
-        position: MODEL_POSITION.head,
+        position: BODY_MODEL_POSITION.head,
         polygonOffset: true,
         hasOuterLayer: checkOuterLayer(outerLayerRegion.head)
       },
@@ -50,7 +50,7 @@ export const getBodyPartsData = (modelType: ModelType, texture: Texture): BodyPa
           geometry: [8.5, 12.5, 4.5],
           uvs: [16, 32, 8, 12, 4],
         },
-        position: MODEL_POSITION.body,
+        position: BODY_MODEL_POSITION.body,
         hasOuterLayer: checkOuterLayer(outerLayerRegion.body)
       },
       {
@@ -63,7 +63,7 @@ export const getBodyPartsData = (modelType: ModelType, texture: Texture): BodyPa
           geometry: [limbsOuterBoxWidth, 12.5, 4.5],
           uvs: [40, 32, limbsWidth, 12, 4],
         },
-        position: isSlim ? SLIM_MODEL_POSITION.rightArm : MODEL_POSITION.rightArm,
+        position: isSlim ? BODY_SLIM_MODEL_POSITION.rightArm : BODY_MODEL_POSITION.rightArm,
         polygonOffset: true,
         hasOuterLayer: checkOuterLayer(outerLayerRegion.rightArm)
       },
@@ -77,7 +77,7 @@ export const getBodyPartsData = (modelType: ModelType, texture: Texture): BodyPa
           geometry: [limbsOuterBoxWidth, 12.5, 4.5],
           uvs: [48, 48, limbsWidth, 12, 4],
         },
-        position: isSlim ? SLIM_MODEL_POSITION.leftArm : MODEL_POSITION.leftArm,
+        position: isSlim ? BODY_SLIM_MODEL_POSITION.leftArm : BODY_MODEL_POSITION.leftArm,
         polygonOffset: true,
         hasOuterLayer: checkOuterLayer(outerLayerRegion.leftArm)
       },
