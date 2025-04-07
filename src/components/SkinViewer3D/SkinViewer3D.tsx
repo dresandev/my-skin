@@ -6,13 +6,14 @@ import { SMAAPreset } from "postprocessing"
 import { BodyModel } from "@/components/BodyModel"
 import { ArmorModel } from "@/components/ArmorModel"
 import { CapeModel } from "@/components/CapeModel"
+import { ElytraModel } from "@/components/ElytraModel"
 
 export const SkinViewer3D = () => {
   return (
     <Canvas
       gl={{ pixelRatio: window.devicePixelRatio }}
       style={{
-        inlineSize: "max-content",
+        inlineSize: 700,
         blockSize: 700,
         touchAction: "none"
       }}
@@ -38,7 +39,8 @@ export const SkinViewer3D = () => {
           <Center>
             <BodyModel />
             {/* <ArmorModel /> */}
-            <CapeModel />
+            {/* <CapeModel /> */}
+            <ElytraModel />
           </Center>
         </Suspense>
       </PresentationControls>

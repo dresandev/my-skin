@@ -1,8 +1,8 @@
 import { useMemo } from "react"
 import { BoxGeometry, DoubleSide, NearestFilter, TextureLoader } from "three"
-import { setCapeUVs } from "@/utils/set-uvs"
 import { useLoader } from "@react-three/fiber"
 import { CAPE_MODEL_DATA } from "@/constants/cape-model-data"
+import { setCapeUVs } from "@/utils/set-uvs"
 
 export const CapeModel = () => {
   const textureUrl = "images/capes/cape.png"
