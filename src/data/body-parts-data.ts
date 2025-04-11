@@ -1,14 +1,24 @@
-import { Texture } from "three"
-import type { BoxData, ModelParts, ModelType, Position } from "@/types"
+  import { Texture } from "three"
+import type {
+  BoxData,
+  BodyPartName,
+  ModelType,
+  Position,
+} from "@/types"
+import {
+  BODY_MODEL_PIVOT_POSITION,
+  BODY_MODEL_POSITION,
+  SLIM_BODY_MODEL_PIVOT_POSITION,
+} from "@/constants/body-model-position"
 import { outerLayerRegions } from "@/constants/outerlayer-regions"
-import { BODY_MODEL_POSITION, BODY_SLIM_MODEL_POSITION } from "@/constants/body-model-position"
 import { hasOuterLayerInRegion, Region } from "@/utils/has-outer-layer-in-region"
 
 export interface BodyPartData {
-  name: ModelParts
+  name: BodyPartName
   innerBoxData: BoxData
   outerBoxData: BoxData
   position: Position
+  pivotPosition?: Position
   polygonOffset?: boolean
   depthWrite?: boolean
   hasOuterLayer: boolean
@@ -63,7 +73,10 @@ export const getBodyPartsData = (modelType: ModelType, texture: Texture): BodyPa
           geometry: [limbsOuterBoxWidth, 12.5, 4.5],
           uvs: [40, 32, limbsWidth, 12, 4],
         },
-        position: isSlim ? BODY_SLIM_MODEL_POSITION.rightArm : BODY_MODEL_POSITION.rightArm,
+        position: BODY_MODEL_POSITION.rightArm,
+        pivotPosition: isSlim
+          ? SLIM_BODY_MODEL_PIVOT_POSITION.rightArm
+          : BODY_MODEL_PIVOT_POSITION.rightArm,
         polygonOffset: true,
         hasOuterLayer: checkOuterLayer(outerLayerRegion.rightArm)
       },
@@ -77,7 +90,10 @@ export const getBodyPartsData = (modelType: ModelType, texture: Texture): BodyPa
           geometry: [limbsOuterBoxWidth, 12.5, 4.5],
           uvs: [48, 48, limbsWidth, 12, 4],
         },
-        position: isSlim ? BODY_SLIM_MODEL_POSITION.leftArm : BODY_MODEL_POSITION.leftArm,
+        position: BODY_MODEL_POSITION.leftArm,
+        pivotPosition: isSlim
+          ? SLIM_BODY_MODEL_PIVOT_POSITION.leftArm
+          : BODY_MODEL_PIVOT_POSITION.leftArm,
         polygonOffset: true,
         hasOuterLayer: checkOuterLayer(outerLayerRegion.leftArm)
       },
@@ -91,7 +107,8 @@ export const getBodyPartsData = (modelType: ModelType, texture: Texture): BodyPa
           geometry: [4.5, 12.5, 4.5],
           uvs: [0, 32, 4, 12, 4],
         },
-        position: [-2, -18, 0],
+        position: BODY_MODEL_POSITION.rightLeg,
+        pivotPosition: BODY_MODEL_PIVOT_POSITION.rightLeg,
         polygonOffset: true,
         depthWrite: false,
         hasOuterLayer: checkOuterLayer(outerLayerRegion.rightLeg)
@@ -106,7 +123,8 @@ export const getBodyPartsData = (modelType: ModelType, texture: Texture): BodyPa
           geometry: [4.5, 12.5, 4.5],
           uvs: [0, 48, 4, 12, 4],
         },
-        position: [2, -18, 0],
+        position: BODY_MODEL_POSITION.leftLeg,
+        pivotPosition: BODY_MODEL_PIVOT_POSITION.leftLeg,
         polygonOffset: true,
         depthWrite: false,
         hasOuterLayer: checkOuterLayer(outerLayerRegion.leftLeg)

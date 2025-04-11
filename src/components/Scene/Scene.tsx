@@ -1,28 +1,27 @@
-import { Suspense } from "react"
+import { PerspectiveCamera, PresentationControls } from "@react-three/drei"
 import { Canvas } from "@react-three/fiber"
-import { Center, PerspectiveCamera, PresentationControls } from "@react-three/drei"
 import { EffectComposer, SMAA } from "@react-three/postprocessing"
 import { SMAAPreset } from "postprocessing"
-import { BodyModel } from "@/components/BodyModel"
-import { ArmorModel } from "@/components/ArmorModel"
-import { CapeModel } from "@/components/CapeModel"
-import { ElytraModel } from "@/components/ElytraModel"
 
-export const SkinViewer3D = () => {
+interface Props {
+  children: React.ReactNode
+}
+
+export const Scene: React.FC<Props> = ({ children }) => {
   return (
     <Canvas
-      gl={{ pixelRatio: window.devicePixelRatio }}
       style={{
         inlineSize: 700,
         blockSize: 700,
-        touchAction: "none"
+        touchAction: "none",
+        imageRendering: "pixelated",
       }}
     >
       <PerspectiveCamera
         makeDefault
-        position={[0, 0, 45]}
+        position={[0, 0, 40]}
         fov={90}
-        zoom={2}
+        zoom={1.6}
         near={0.1}
         far={100.0}
       >
@@ -35,14 +34,7 @@ export const SkinViewer3D = () => {
         damping={0.01}
         speed={1.5}
       >
-        <Suspense>
-          <Center>
-            <BodyModel />
-            {/* <ArmorModel /> */}
-            {/* <CapeModel /> */}
-            <ElytraModel />
-          </Center>
-        </Suspense>
+        {children}
       </PresentationControls>
 
       <EffectComposer multisampling={0}>

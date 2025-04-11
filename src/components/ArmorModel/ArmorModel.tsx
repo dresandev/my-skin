@@ -6,7 +6,7 @@ import { flipTextureHorizontally } from "@/utils/flip-texture-horizontally"
 import { ArmorPart } from "@/components/ArmorPart"
 
 export const ArmorModel = () => {
-  const textureUrl = "images/armor-trims/top_eye.png"
+  const textureUrl = "images/armors/iron.png"
   const texture = useLoader(TextureLoader, textureUrl)
 
   const processedTexture = useMemo(() => (

@@ -1,8 +1,8 @@
-import type { BoxData, ModelParts, Position } from "@/types"
+import type { BoxData, BodyPartName, Position } from "@/types"
 import { BODY_MODEL_POSITION } from "@/constants/body-model-position"
 
 export interface ArmorPartData {
-  name: ModelParts
+  name: BodyPartName
   box: BoxData
   position: Position
   polygonOffset?: boolean

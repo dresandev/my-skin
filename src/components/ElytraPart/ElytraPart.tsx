@@ -9,7 +9,12 @@ interface Props {
 }
 
 export const ElytraPart: React.FC<Props> = ({ texture, data }) => {
-  const { box: { geometry, uvs }, position, rotation, scale } = data
+  const {
+    box: { geometry, uvs },
+    position,
+    rotation,
+    scale,
+  } = data
 
   const geometryBox = useMemo(() => {
     const box = new BoxGeometry(...geometry)
@@ -19,18 +24,20 @@ export const ElytraPart: React.FC<Props> = ({ texture, data }) => {
   }, [geometry, uvs])
 
   return (
-    <mesh
-      geometry={geometryBox}
-      position={position}
-      rotation={rotation}
-      scale={scale}
-    >
-      <meshStandardMaterial
-        map={texture}
-        side={DoubleSide}
-        transparent
-        alphaTest={1e-5}
-      />
-    </mesh>
+    <group>
+      <mesh
+        geometry={geometryBox}
+        position={position}
+        rotation={rotation}
+        scale={scale}
+      >
+        <meshStandardMaterial
+          map={texture}
+          side={DoubleSide}
+          transparent
+          alphaTest={1e-5}
+        />
+      </mesh>
+    </group>
   )
 }

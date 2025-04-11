@@ -1,8 +1,8 @@
-import type { ModelParts } from "@/types"
+import type { BodyPartName } from "@/types"
 
 type Region = { x: number; y: number; width: number; height: number }
 
-type OuterLayerMap = { [key in ModelParts]: Region[] }
+type OuterLayerMap = { [key in BodyPartName]: Region[] }
 
 export const outerLayerRegions: { normal: OuterLayerMap; slim: OuterLayerMap } = {
   normal: {

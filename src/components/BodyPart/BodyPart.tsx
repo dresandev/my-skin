@@ -36,29 +36,30 @@ export function BodyPart({ texture, data }: Props) {
     return box
   }, [outerBoxData.geometry, outerBoxData.uvs])
 
-  if (!hasOuterLayer) return (
-    <mesh geometry={innerBoxGeometry} position={position}>
-      <meshStandardMaterial map={texture} />
-    </mesh>
-  )
-
   return (
     <group position={position}>
       <mesh geometry={innerBoxGeometry}>
-        <meshStandardMaterial map={texture} />
-      </mesh>
-      <mesh geometry={outerBoxGeometry}>
         <meshStandardMaterial
           map={texture}
-          transparent={true}
-          alphaTest={1e-5}
-          side={DoubleSide}
           polygonOffset={polygonOffset}
           polygonOffsetFactor={1.0}
           polygonOffsetUnits={1.0}
-          depthWrite={depthWrite}
         />
       </mesh>
+      {hasOuterLayer && (
+        <mesh geometry={outerBoxGeometry}>
+          <meshStandardMaterial
+            map={texture}
+            transparent={true}
+            alphaTest={1e-5}
+            side={DoubleSide}
+            polygonOffset={polygonOffset}
+            polygonOffsetFactor={1.0}
+            polygonOffsetUnits={1.0}
+            depthWrite={depthWrite}
+          />
+        </mesh>
+      )}
     </group>
   )
 }

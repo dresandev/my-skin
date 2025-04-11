@@ -1,5 +1,5 @@
-import { useLoader } from "@react-three/fiber"
 import { NearestFilter, TextureLoader } from "three"
+import { useLoader } from "@react-three/fiber"
 import { ELYTRA_MODEL_DATA } from "@/constants/elytra-model-data"
 import { ElytraPart } from "@/components/ElytraPart"
 

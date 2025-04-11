@@ -1,7 +1,13 @@
-import type { BoxData, Position, Rotation, Scale } from "@/types"
+import type {
+  BoxData,
+  ElytraPartName,
+  Position,
+  Rotation,
+  Scale,
+} from "@/types"
 
 export interface ElytraPartData {
-  name: string
+  name: ElytraPartName
   box: BoxData
   position: Position
   rotation: Rotation
